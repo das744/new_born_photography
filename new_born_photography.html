@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accounting Service Website</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --primary: #cc0264;
+        /* --primary: rgb(0, 0, 0, 0.4); */
+        --secondary:  rgba(99, 75, 75, 0.3); 
+        --heading-primary:#000;
+        --white-text: #fff;
+        --h1_color: #565656;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        font-size: clamp(
+          1.5rem,
+          4vw + 1rem,
+          2.7em
+        ); /* Adjusts between 1.5rem and 3em depending on viewport width */
+        margin-bottom: 20px;
+        color: var(--h1_color);
+        
+      }
+      h2 {
+        font-size: clamp(
+          1rem,
+          4vw + 1rem,
+          1.3em
+        ); /* Adjusts between 1.5rem and 3em depending on viewport width */
+        margin-bottom: 20px;
+        color: var(--h1_color);
+      }
+
+      p {
+        font-size: clamp(
+          1rem,
+          2.5vw + 0.5rem,
+          1.2em
+        ); /* Adjusts between 1rem and 1.5em depending on viewport width */
+        margin-bottom: 20px;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      }
+      a {
+        font-size: clamp(
+          1rem,
+          2.5vw + 0.5rem,
+          1.5em
+        ); /* Adjusts between 1rem and 1.5em depending on viewport width */
+        margin-bottom: 20px;
+      }
+
+      button {
+        padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 24px); /* Adjusts padding for responsiveness */
+        background-color: rgb(138, 136, 136);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 0.4rem;
+        font-size: clamp(
+          0.875rem,
+          2vw + 0.5rem,
+          1.2rem
+        ); /* Adjusts font size of the button */
+      }
+
+/*  Animation Keyframes */ 
+@keyframes fadeInTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+ /* animation: fadeInTop 1s ease 0.5s forwards; */
+
+ @keyframes fadeInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+ /* animation: fadeInBottom 1s ease 0.5s forwards; */
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+ /* animation: fadeInLeft 1s ease 0.5s forwards; */
+
+ @keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+ /* animation: fadeInRight 1s ease 0.5s forwards; */
+
+ @keyframes zoomIn {
+  0% {
+    transform: scale(0.8); 
+    opacity: 0; 
+  }
+  100% {
+    transform: scale(1); 
+    opacity: 1; 
+  }
+}
+ /* animation: zoomIn 1s ease forwards; */
+
+ @keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+ 
+
+
+      #main {
+        height: 100vh;
+        background: linear-gradient(
+            to left,
+            rgb(25, 28, 33),
+            rgba(6, 9, 12, 0.75),
+            rgba(16, 21, 30, 0.5),
+            rgba(47, 53, 62, 0.1)
+          ),
+          url("https://cdn.pixabay.com/photo/2017/09/05/11/37/baby-2717347_1280.jpg");
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        /* position: relative; */
+  /* clip-path: polygon(50% 0%, 80% 0, 100% 0, 100% 91%, 76% 86%, 55% 84%, 19% 87%, 0 94%, 0 0, 20% 0); */
+
+      }
+
+      /* Header styling */
+      header {
+        /* position: fixed; */
+          /* background-color: white; */
+          /* z-index: 1000; */
+        top: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 20px 20px;
+      }
+
+      header .logo {
+        font-size: 1.5em;
+        color: #fff;
+        letter-spacing: 0.1rem;
+        text-shadow: 0.4rem 0.4rem rgba(0, 0, 0, 0.1);
+      }
+
+      header .menu ul {
+        list-style: none;
+        display: flex;
+      }
+
+      header .menu ul li {
+        margin: 0 10px;
+      }
+
+      header .menu ul li a {
+        color: #fff;
+        text-decoration: none;
+        letter-spacing: 0.1rem;
+        text-shadow: 0.4rem 0.4rem rgba(0, 0, 0, 0.1);
+      }
+
+      header .contact-us button {
+        padding: 10px 20px;
+        background-color: var(--primary);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      header .hamburger {
+        display: none;
+        cursor: pointer;
+      }
+      header .hamburger span {
+        font-size: 1.2rem;
+      }
+
+      /* navbar coming from left in mobile */
+
+      /* .mobile-menu {
+  display: none;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100vh;
+  z-index: 999;
+  transition: left 0.3s ease;
+} */
+
+      /* navbar is coming from right */
+      .mobile-menu {
+        display: none;
+        background-color: #333;
+        position: fixed;
+        top: 0;
+        right: -250px; /* Change 'left' to 'right' */
+        width: 250px;
+        height: 100vh;
+        z-index: 999;
+        transition: right 0.3s ease; /* Change 'left' to 'right' */
+      }
+
+      .mobile-menu ul {
+        list-style: none;
+        padding: 20px;
+        margin-top: 2.2rem;
+      }
+
+      .mobile-menu ul li {
+        margin: 10px 0;
+      }
+
+      .mobile-menu ul li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        display: block;
+        width: 100%;
+        text-align: left;
+      }
+     
+      /* .ball {
+            position: fixed;
+            top: 50%;
+            left: 10%;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(251, 185, 176, 0.5); 
+            border-radius: 50%;
+            box-shadow: 0 8px 15px 8px rgba(0, 0, 0, 0.2); 
+            z-index: 100; 
+            animation: float 4s ease-in-out infinite; 
+            transform: translate(-50%, -50%); 
+        } */
+
+  
+      @keyframes float {
+            0%, 100% {
+                transform: translateY(-10px);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+        
+        }
+
+
+      /* Hero section styling */
+      .hero,
+      #about {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .hero {
+        /* background-color: black; */
+      }
+
+      .hero-text,
+      .about-text {
+        text-align: center;
+        padding: 0 20px;
+      }
+      .hero-text {
+        margin: 5rem;
+      }
+      /* .hero-img img {
+        width: 50%;
+        height: auto;
+        background-image: url("https://upload.wikimedia.org/wikipedia/commons/d/da/Precincts_of_Watari-jinja_shrine_in_Spring_season_2.JPG");
+      } */
+      .hero-text h1,
+      p {
+        color: #fff;
+       
+      }
+      .hero-text h1{
+        animation: fadeInLeft 1s ease 0.5s forwards;
+      }
+      .hero-text p{
+        animation: fadeInRight 1s ease 0.5s forwards;
+
+}
+      .hero-text button {
+        background-color: var(--primary);
+        animation: fadeInBottom 1s ease 0.5s forwards;
+      }
+
+      /* Responsive styling */
+      @media (max-width: 768px) {
+        header .menu,
+        header .contact-us {
+          display: none;
+        }
+
+        header .hamburger {
+          display: block;
+          width: 20px;
+          height: 10px;
+        }
+
+        .mobile-menu {
+          display: block;
+        }
+        .hero {
+          padding-top: 15%;
+          flex-direction: column;
+          height: 100vh;
+        }
+      }
+      @media (max-width: 640px) {
+        .hero-text h1 {
+          padding-top: 3rem;
+        }
+      }
+      /* partners section_2 */
+      #partners {
+        width: 100%;
+        margin: 5rem 3rem;
+        text-align: center;
+      }
+
+      .all_partners {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 3rem;
+      }
+      .all_partners h2{
+        font-size: 1.5rem;
+        color: var(--h1_color);
+        text-shadow: .4rem .4rem rgba(0, 0, 0, 0.1);
+        animation: zoomIn 1s ease forwards;
+      }
+      .all_partners i{
+        color: var(--primary);
+        margin-right: 10px;
+        font-size: 1.5rem;
+      }
+
+      /* about-section_3 */
+     .about-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 100px;
+        background-color: #f4f4f4;
+      }
+
+      .text-container {
+        width: 45%;
+        position: relative;
+        text-align: justify;
+      }
+
+      .text-container .heading {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateY(100px);
+        transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+      }
+
+      .text-container p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        color: var(--h1_color);
+         animation: zoomIn 1s ease forwards;
+
+      }
+      .text-container button{
+      box-shadow: 0 2rem 2rem 1rem rgba(0, 0, 0, 0.1);
+      }
+
+      .about-images {
+        width: 45%;
+        display: grid;
+        grid-template-areas:
+          "img1 img2"
+          "img3 img2";
+        gap: 10px;
+      }
+
+      .image1 {
+        grid-area: img1;
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        transform: translateX(-100%);
+        transition: transform 0.8s ease-out;
+      }
+
+      .image2 {
+        grid-area: img2;
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        transform: translateX(100%);
+        transition: transform 0.8s ease-out;
+      }
+
+      .image3 {
+        grid-area: img3;
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+        transform: translateY(100%);
+        transition: transform 0.8s ease-out;
+      }
+
+      #about button{
+        background-color: var(--primary);
+      }
+
+      @media (max-width: 768px) {
+      .about-section {
+        flex-direction: column;
+        text-align: justify;
+
+      }
+      .text-container {
+        width: 95%;
+      }
+      .text-container button{
+        margin-bottom: 2rem;
+      }
+      .about-images {
+        width: 95%;
+      }
+    }
+    /* feature section-5 */
+     #feature {
+        margin: 6rem 1rem;
+        text-align: center;
+      }
+      .feature_grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        margin: 3rem 1rem;
+      }
+      .grid-item {
+        position: relative;
+        
+        padding: 5rem 1rem !important;
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        box-shadow: 0 1rem 1rem 0 rgba(0, 0, 0, 0.1);
+        animation: zoomIn 1s ease forwards;
+      }
+      .feature_grid-container .grid-item:nth-child(1){
+       /* background-color: var(--secondary) !important; */
+
+      }
+      .feature_grid-container .grid-item:nth-child(2){
+        padding-top: 7rem!important;
+
+      }
+      /* Outline effect on specific corners */
+      .grid-item::before,
+      .grid-item::after {
+        content: "";
+        position: absolute;
+        margin: 5px;
+        width: 50px; /* Width of the outline */
+        height: 50px; /* Height of the outline */
+        border: 5px solid var(--primary); /* Color and thickness of the outline */
+      }
+
+      /* Top-left corner outline */
+      .grid-item::before {
+        top: 0;
+        left: 0;
+        border-top-left-radius: 20px;
+        border-bottom: none;
+        border-right: none;
+      }
+
+      /* Bottom-right corner outline */
+      .grid-item::after {
+        bottom: 0;
+        right: 0;
+        border-bottom-right-radius: 20px;
+        border-top: none;
+        border-left: none;
+      }
+
+      .feature_grid-container .icon{
+        color: var(--primary);
+        font-size: 2rem;
+        background-color: var(--secondary); 
+      padding: 1rem;
+        border-radius: 50%;
+        box-shadow: 0 2rem 2rem 1rem rgba(0, 0, 0, 0.1);
+
+      }
+      .feature_grid-container .content{
+        animation: zoomIn 1s ease forwards;
+      }
+    .feature_grid-container .content p{
+        color: black;
+        padding-top: 1rem;
+    }
+      /* Applying specific border radius color to opposite corners */
+
+      /* service */
+      /* Parallax Section Styling */
+      .parallax_service_section {
+        position: relative;
+        background-image: url("https://cdn.pixabay.com/photo/2017/11/06/15/49/baby-2923997_1280.jpg"); /* Replace with your desired image */
+        background-attachment: fixed; /* Fixed background for parallax */
+        background-size: cover;
+        background-position: center;
+        padding: 10rem 5rem;
+        overflow: hidden;
+        
+      }
+      .parallax_service_section h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+        animation: zoomIn 1s ease forwards;
+      }
+      /* Service Grid Layout */
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Service Box Styling */
+      .service-box {
+        position: relative;
+        background-color: rgb(0, 0, 0, 0.5); 
+        
+        padding: 70px 20px;
+        text-align: center;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.5s forwards;
+
+      }
+      /* Animation delays to show items one by one */
+.item1 {
+  animation-delay: 0.2s;
+}
+
+.item2 {
+  animation-delay: .4s;
+}
+
+.item3 {
+  animation-delay: .6s;
+}
+
+.item4 {
+  animation-delay: .8s;
+}
+.item5 {
+  animation-delay: 1s;
+}
+.item6 {
+  animation-delay: 1.2s;
+}
+
+      /* Icon and Heading Styling */
+      .service-box i {
+        font-size: 40px;
+        color: var(--primary);
+        animation: fadeInTop 1s ease forwards;
+        transition: transform 0.3s ease; /* Smooth transition for hover effect */
+      }
+
+      .service-box h3 {
+        margin: 10px 0;
+        color: var(--white-text);
+        font-size: 20px;
+        animation: fadeInLeft 1s ease 0.5s forwards;
+        transition: transform 0.3s ease; /* Smooth transition for hover effect */
+      }
+
+      /* Service Text Styling */
+      .service-text {
+        position: absolute; /* Absolute position for sliding up effect */
+        bottom: -100%; /* Start hidden from the bottom */
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9); /* Background for text */
+        padding: 10px;
+        color: #555;
+        text-align: center;
+        transition: bottom 0.5s ease; /* Smooth transition for sliding */
+      }
+
+      /* Hover Effect for Service Box */
+      .service-box:hover {
+        background-color: #ffffff;
+        transform: translateY(-10px);
+      }
+
+      /* Hover Effect for Icon and Heading */
+      .service-box:hover i,
+      .service-box:hover h3 {
+        transform: translateY(-30px);
+        color:var(--primary);
+      }
+
+      .service-box:hover .service-text {
+        bottom: 0px;
+      }
+      .custom-shape-divider-bottom-1725750896 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1725750896 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 54px;
+}
+
+.custom-shape-divider-bottom-1725750896 .shape-fill {
+    fill: #FFFFFF;
+}
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .service-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .service-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+
+      /* testimonial section-6 */
+
+      #testimonial-section {
+       margin: 1rem 1rem;
+      }
+      #testimonial-section h1 {
+        text-align: center;
+        margin: 5rem;
+        
+      }
+      .testimonial-box h3{
+        animation: fadeInLeft 1s ease 0.5s forwards;
+        color: rgb(66, 63, 63) !important;
+        padding: 1rem;
+      }
+      .testimonial-box p{
+        color: black;
+        animation: fadeInRight 1s ease 0.5s forwards;
+      }
+
+      .testimonial-container {
+        display: flex;
+        
+        
+        width: 100%;
+        /* background-color: red; */
+      }
+
+      .testimonial-wrapper {
+        /* display: flex; */
+        display: grid;
+        grid-template-columns:repeat(auto-fit,minmax(200px, 1fr)) ;
+        transition: transform 0.5s ease;
+        width: 100%; /* Adjust based on the number of items */
+      }
+
+      .testimonial-box {
+
+        /* flex: 0 33.33%; */
+        background: #fff;
+        border: 1px solid #f1f0f0;
+        border-radius: 8px;
+        padding: 3rem 1rem;
+        text-align: center;
+        margin-right: 2rem;
+        box-shadow: 0 1rem 1rem 0 rgba(0, 0, 0, 0.1);
+      }
+
+      .testimonial-box i {
+        /* width: 100px;
+        height: 100px; */
+        left: 0;
+        margin-left: -50px;
+        color: var(--primary);
+        text-shadow: .4rem .4rem rgba(0, 0, 0, 0.1);
+       
+
+        /*  animation: fadeInLeft 1s ease 0.5s forwards; */
+        /* animation: fadeInTop 1s ease forwards; */
+      }
+      .testimonial-box h3{
+        color: var(--secondary)
+      }
+
+      /* accordion */
+      #accordion {
+        text-align: center;
+        margin: 8rem 5rem;
+      }
+      .accordion_container {
+        display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+       
+    }
+
+
+      .image-section {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        flex: 1;
+        margin: 10px;
+        /* height: 100%; */
+      }
+
+
+
+      .big-image {
+        flex: 1; /* Takes full height */
+        display: flex;
+      }
+
+      .big-image img {
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        object-fit: cover; /* Maintain image aspect ratio */
+        border-radius: 10px;
+        transition: transform 0.3s ease; /* Zoom effect */
+        /* animation: zoomIn 1s ease forwards; */
+        animation: fadeInTop 1s ease forwards;
+      }
+      /* Image Layout */
+      .small-images {
+        display: flex;
+        gap: 10px;
+        flex: 1;
+      }
+      .small-images img {
+        width: 50%; /* Each small image takes 50% width */
+        height: 100%; /* Full height */
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+        animation: zoomIn 1s ease forwards;
+      }
+      .big-image img:hover,
+      .small-images img:hover {
+        transform: scale(1.1); /* Zoom in slightly on hover */
+      }
+      .accordion-container {
+    max-width: 600px;
+    margin-left:50px;
+    overflow: hidden;
+   
+
+}
+
+.accordion-box{
+    /* background-color: red; */
+   margin-bottom: 1rem;
+   padding: 1rem 0;
+
+}
+
+.accordion-button {
+    background-color: var(--secondary);
+    color: black;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 25px;
+    text-align: left;
+    outline: none;
+    border: none;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    
+}
+
+.accordion-button:hover {
+    background-color: var(--primary);
+    color: var(--white-text);
+}
+
+.accordion-button:after {
+    content: '\002B'; /* Unicode for plus sign */
+    font-size: 1.2rem;
+    float: right;
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+}
+
+.accordion-button.active:after {
+    content: "\2212"; /* Unicode for minus sign */
+    transform: rotate(180deg);
+}
+
+.accordion-content p{
+    color: black;
+
+}
+
+/* when smooth opening */
+.accordion-content {
+  text-align: justify;
+    max-height: 0;
+    padding: 0 15px;
+    border-top: 1px solid #ddd;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+      /* Media Query for Responsiveness */
+      @media (max-width: 768px) {
+       .accordion_container {
+          flex-direction: column;
+          padding: 10px;
+        }
+        /* .image-section {
+            display: none;
+        } */
+
+        .image-section {
+          flex-direction: column;
+        }
+
+        .small-images {
+          flex-direction: column; 
+        }
+
+        .small-images img {
+          width: 100%; 
+        }
+      
+      }
+      @media (max-width: 608px) {
+        .accordion-container{
+          /* max-width: 400px; */
+          margin: 0;
+          gap: 1px;
+
+        }
+      }
+
+
+      /* contact */
+      .custom-shape-divider-top-1725842086 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1725842086 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 78px;
+}
+
+.custom-shape-divider-top-1725842086 .shape-fill {
+    fill: #FFFFFF;
+}
+      #contact{
+        height: 100vh;
+        background: linear-gradient(
+            to right,
+            rgb(25, 28, 33),
+            rgba(6, 9, 12, 0.75),
+            rgba(16, 21, 30, 0.5),
+            rgba(47, 53, 62, 0.1)
+          ),
+          url("https://cdn.pixabay.com/photo/2017/02/02/09/36/baby-2032302_1280.jpg");
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+
+      .contact-section {
+        display: flex;
+        justify-content: space-between;
+        padding: 6rem;
+        gap: 2rem;
+        animation: fadeIn 1s ease-out forwards;
+        opacity: 0; /* Start hidden */
+        transform: translateY(50px); /* Move slightly down */
+      }
+
+      .contact-form-container {
+        flex: 1;
+        display: flex;
+        margin-top: 10%;
+        flex-direction: column;
+        /* align-items: center; */
+        justify-content: space-between;
+      }
+
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .contact-form h2{
+        color: #fff;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        padding: 1rem;
+        background: rgb(221, 221, 221, 0.3);
+        border: 1px solid rgb(221, 221, 221);
+        border-radius: 5px;
+      }
+      .contact-form input::placeholder,
+      .contact-form textarea::placeholder {
+        color:#c5c4c4
+      }
+
+      .contact-form button {
+        padding: 0.8rem;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .contact-form button:hover {
+        background:#fff;
+      }
+
+
+      .contact-details {
+        flex: 1;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        justify-content: space-evenly;
+        gap: 1.5rem;
+        padding: 1rem;
+        background: rgba(149, 148, 148, 0.4);
+        border-radius: 8px;
+      }
+
+      .contact-details ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .contact-details li {
+        margin: 0.5rem 0;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .contact-details li i{
+        color: var(--primary);
+        background-color: #fff;
+        padding: .7rem .7rem;
+        border-radius: 50%;
+        font-size: 1.4rem;
+      }
+      .contact-details li p{
+        padding-top: 10px;
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 1.2rem;
+        align-items: center;
+        margin-left:30%;
+        color: #fff;
+      }
+
+      .social-icons i {
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .social-icons i:hover {
+        transform: scale(1.2);
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .contact-section {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+      .contact-footer p{
+        text-align: center;
+        margin-top: 1rem;
+        color: var(--primary)!important;
+        
+      }
+    </style>
+  </head>
+  <body>
+    <section id="main">
+      <header>
+        <div class="logo">Logo</div>
+        <nav class="menu">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="contact-us">
+          <button>Contact Us</button>
+        </div>
+        <div class="hamburger">
+          <span>&#9776;</span>
+        </div>
+      </header>
+
+      <div class="mobile-menu">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="ball" id="ball"></div>
+      <section class="hero">
+        <div class="hero-text">
+          <h1>Your Vision, Our Lens</h1>
+          <!-- <h2>Your Vision, Our Lens</h2> -->
+          <p>
+            Every picture tells a story. We capture life’s most cherished moments and turn them into timeless memories, ensuring your special moments are beautifully preserved for a lifetime.
+          </p>
+          <button>Contact ME</button>
+        </div>
+        <div class="hero-img">
+          <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Precincts_of_Watari-jinja_shrine_in_Spring_season_2.JPG" alt="">
+           -->
+        </div>
+        <div class="custom-shape-divider-bottom-1725750896">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+      </section>
+    </section>
+    <!-- partners section_2 -->
+    <section id="partners">
+      <h1>Capture Your Story in Every Frame</h1>
+      <div class="all_partners">
+        <h2><i class="fas fa-camera"></i>Camera</h2>
+        <h2><i class="fas fa-image"></i>Image</h2>
+        <h2> <i class="fas fa-photo-video"></i>Video</h2>
+        <h2>  <i class="fas fa-film"></i>Film</h2>
+        <h2><i class="fas fa-heart"></i>Love</h2>
+      </div>
+    </section>
+    
+    <!-- about section_3 -->
+   
+    <section id="about">
+        <div class="about-section">
+          <div class="text-container">
+            <h2 id="animated-heading" class="heading">Why Choose Us?</h2>
+            <p id="animated-paragraph">
+              We’re not just photographers; we’re visual storytellers. Our passion, combined with technical expertise, ensures that every shot reflects artistry and professionalism.
+            </p>
+            <button>Contact ME</button>
+          </div>
+          <div class="about-images">
+            <!-- https://cdn.pixabay.com/photo/2013/10/25/13/54/baby-200760_1280.jpg -->
+           
+            <img
+              src=" https://cdn.pixabay.com/photo/2021/09/18/20/38/family-6636042_1280.jpg"
+              class="image1"
+              alt="Image 1"
+            />
+            <img
+              src="https://cdn.pixabay.com/photo/2016/01/21/14/54/father-and-son-1153919_1280.jpg"
+              class="image2"
+              alt="Image 2"
+            />
+            <!-- https://cdn.pixabay.com/photo/2016/07/24/13/07/baby-1538342_1280.jpg
+           -->
+            <img
+              src=" https://cdn.pixabay.com/photo/2016/11/19/14/28/bed-1839564_1280.jpg "
+              class="image3"
+              alt="Image 3"
+            />
+          </div>
+        </div>
+      </section>
+
+    <!-- feature section_5 -->
+    <section id="feature">
+      <h1>Choose Your Perfect Package</h1>
+      <p>We offer flexible packages tailored to fit your needs. From personal photoshoots to large events, find the perfect option for you.</p>
+      <div class="feature_grid-container">
+        <div class="grid-item">
+            <div class="icon">
+              <i class="fas fa-gift"></i>
+            </div>
+            <div class="content">
+                <h3>Basic Package</h3>
+                <p>Ideal for small events or quick portrait sessions.</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="icon">
+              <i class="fas fa-list-ul"></i>
+            </div>
+            <div class="content">
+                <h3>Premium Package</h3>
+                <p>Best for larger events like weddings, with extended coverage.</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="icon">
+              <i class="fas fa-clipboard-check"></i>
+            </div>
+            <div class="content">
+                <h3>Custom Package</h3>
+                <p>Tailored to your specific photography needs.</p>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- service section_4 -->
+    <section id="services" class="parallax_service_section">
+      <h1>Available Services</h1>
+      <div class="service-grid">
+        <div class="service-box item1">
+          <i class="fas fa-cogs"></i>
+          <h3>Wedding Photography</h3>
+          <p class="service-text">Immortalize the magic of your big day with stunning visuals that capture every smile, tear, and intimate moment.</p>
+        </div>
+        <div class="service-box item2">
+          <i class="fas fa-rocket"></i>
+          <h3>Event Photography</h3>
+          <p class="service-text">From corporate events to private parties, we ensure every detail and emotion is documented beautifully.</p>
+        </div>
+        <div class="service-box item3">
+          <i class="fas fa-heart"></i>
+          <h3>Portrait Photography</h3>
+          <p class="service-text">Celebrate individuality with personalized portrait sessions that highlight your best features and unique personality.</p>
+        </div>
+        <div class="service-box item4">
+          <i class="fas fa-star"></i>
+          <h3>Commercial Photography</h3>
+          <p class="service-text">Elevate your brand with high-quality imagery that aligns with your company’s vision and speaks to your audience.</p>
+        </div>
+        <div class="service-box item5">
+          <i class="fas fa-leaf"></i>
+          <h3>Product Photography</h3>
+          <p class="service-text">Showcase your products in the best light. High-definition product shots that bring your offerings to life for customers.</p>
+        </div>
+        <div class="service-box item6">
+          <i class="fas fa-lightbulb"></i>
+          <h3>Travel & Landscape Photography</h3>
+          <p class="service-text">Discover breathtaking landscapes and travel photography that brings the world’s beauty to your fingertips.</p>
+        </div>
+      </div>
+      <div class="custom-shape-divider-bottom-1725750896">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+        </svg>
+    </div>
+    </section>
+
+    <!-- testomonial section_6 -->
+    <section id="testimonial-section">
+      <h1>What our valued customer said??</h1>
+      <div class="testimonial-container">
+        <div class="testimonial-wrapper" id="testimonial-wrapper">
+          <div class="testimonial-box">
+            <i class="fas fa-quote-left"></i>
+            <h3>"A Dream Come True"</h3>
+            <p>"I couldn’t have asked for better wedding photos! Every image was filled with emotion and perfectly captured our day. Highly recommend!"</p>
+            <div class="img_div">
+                <img src="" alt="">
+                <div class="name">
+                    <h4>– Sarah & James</h4>
+                    <!-- <p>Owner</p> -->
+                </div>
+
+
+            </div>
+          </div>
+          <div class="testimonial-box">
+            <i class="fas fa-quote-left"></i>
+            <h3>"Professional and Creative"</h3>
+            <p>"Their work exceeded my expectations. The attention to detail and creativity made our commercial shoot a huge success." </p>
+            <div class="img_div">
+                <img src="" alt="">
+                <div class="name">
+                    <h4>– Linda M.
+                    </h4>
+                    <!-- <p>Owner</p> -->
+                </div>
+
+
+            </div>
+          </div>
+          <div class="testimonial-box">
+            <i class="fas fa-quote-left"></i>
+            <h3>"Capturing the Essence"</h3>
+            <p>"They managed to capture the essence of my brand in every shot. The photos are now proudly displayed on my website!" </p>
+            <div class="img_div">
+                <img src="" alt="">
+                <div class="name">
+                    <h4>– Mark T.</h4>
+                    <!-- <p>Owner</p> -->
+                </div>
+
+
+            </div>
+          </div>
+          <div class="testimonial-box">
+            <i class="fas fa-quote-left"></i>
+            <h3>"Unforgettable Experience"</h3>
+            <p>"From start to finish, the experience was smooth and professional. The final images were simply stunning!"</p>
+            <div class="img_div">
+                <img src="" alt="">
+                <div class="name">
+                    <h4>– Emily R.</h4>
+                    <!-- <p>Owner</p> -->
+                </div>
+
+
+            </div>
+           
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- accordion -->
+    <section id="accordion">
+        <h1>Our Main Feature</h1>
+        <!-- <p>Lorem ipsum dolor sit amet.</p> -->
+        <div class="accordion_container">
+       
+            <div class="image-section">
+              <div class="big-image">
+                <img
+                  src="https://cdn.pixabay.com/photo/2015/05/26/12/30/baby-784608_1280.jpg"
+                  alt="Big Image"
+                />
+              </div>
+              <div class="small-images">
+                <img
+                  src="https://images.pexels.com/photos/359571/pexels-photo-359571.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  alt="Small Image 1"
+                />
+                <img
+                  src="https://cdn.pixabay.com/photo/2016/07/24/13/07/baby-1538342_1280.jpg"
+                  alt="Small Image 2"
+                />
+              </div>
+         
+          </div>
+  
+          <div class="accordion-container">
+            <div class="accordion-box">
+                <button class="accordion-button">Personalised Photoshoots</button>
+                <div class="accordion-content">
+                    <p>Every client is unique, and so is our approach. Enjoy custom-tailored photography sessions that align with your vision and style.</p>
+                </div>
+            </div>
+            <div class="accordion-box">
+                <button class="accordion-button">Professional Gear & Equipment</button>
+                <div class="accordion-content">
+                    <p>Utilizing top-of-the-line cameras, lenses, and lighting, we ensure every shot is high-quality and professional, capturing the moment perfectly.</p>
+                </div>
+            </div>
+        
+            <div class="accordion-box">
+                <button class="accordion-button">Stunning Visual Storytelling</button>
+                <div class="accordion-content">
+                    <p>TCapture moments that tell a story beyond the lens. Each photo reflects the emotion, essence, and beauty of every moment.</p>
+                </div>
+            </div>
+        
+            <div class="accordion-box">
+                <button class="accordion-button">Expert Editing & Retouching</button>
+                <div class="accordion-content">
+                    <p>Enhance every photograph with precision. From light corrections to advanced retouching, every image is perfected to its finest detail.</p>
+                </div>
+            </div>
+        
+            <div class="accordion-box">
+                <button class="accordion-button">Diverse Photography Styles</button>
+                <div class="accordion-content">
+                    <p>Whether it's portrait, landscape, or candid shots, we excel in all photography styles, bringing out the best in each scene or subject.</p>
+                </div>
+            </div>
+        </div>
+        </div>
+      </section>
+
+    <!-- contact section_7 -->
+     
+    <section class="contact-section" id="contact">
+        <div class="custom-shape-divider-top-1725842086">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+      <div class="contact-form-container">
+        <form class="contact-form">
+          <h2>Contact Us</h2>
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+     
+      </div>
+
+      <div class="contact-details">
+        <ul>
+          <li><i class="fa fa-phone"></i> <p>+123 456 7890</p></li>
+          <li><i class="fa fa-envelope"></i> <p>email@example.com</p></li>
+          <li>
+            <i class="fa fa-map-marker"></i> <p>123 Main Street, City, Australia</p>
+          </li>
+        </ul>
+        <div class="social-icons">
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-linkedin"></i>
+        </div>
+      </div>
+    </section>
+    <footer class="contact-footer">
+      <p>© 2024 Your Company. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+
+      
+      document.querySelector(".hamburger").addEventListener("click", () => {
+        const mobileMenu = document.querySelector(".mobile-menu");
+        //   mobileMenu.style.left = mobileMenu.style.left === '0px' ? '-250px' : '0px';
+        mobileMenu.style.right =
+          mobileMenu.style.right === "0px"
+            ? "-250px"
+            : "0px"; /* Change 'left' to 'right' */
+      });
+
+      // ball animation
+      const ball = document.getElementById('ball');
+        let isMouseMoving = false;
+
+        // Event listener for mouse movement
+        document.addEventListener('mousemove', (event) => {
+            // Get the mouse coordinates
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+
+            // Update ball position to follow the mouse
+            ball.style.left = `${mouseX}px`;
+            ball.style.top = `${mouseY}px`;
+            ball.style.animation = 'none'; // Stop floating animation while the mouse is moving
+
+            // Clear any existing timeout and reset state if mouse is moving
+            if (!isMouseMoving) {
+                isMouseMoving = true;
+            }
+
+            // Set a timeout to resume floating animation after mouse stops moving
+            clearTimeout(ball.dataset.timeout);
+            ball.dataset.timeout = setTimeout(() => {
+                isMouseMoving = false;
+                ball.style.animation = 'float 4s ease-in-out infinite'; // Restart floating animation
+            }, 200); // 200ms delay to detect when the mouse stops
+        });
+
+// ball animation ends
+    
+
+  // about section function
+  window.addEventListener("scroll", () => {
+        const heading = document.querySelector(".heading");
+        const scrollPosition = window.scrollY;
+
+        // Animate heading text
+        if (scrollPosition > 100) {
+          heading.style.transform = "translateY(0)";
+          heading.style.opacity = "1";
+        }
+
+        // Animate images at about section
+        const images = document.querySelectorAll(".about-images img");
+        images.forEach((img) => {
+          if (scrollPosition > 300) {
+            img.style.transform = "translateX(0)";
+            img.style.transform = "translateY(0)";
+          }
+        });
+      });
+
+      // about section function ends
+
+    //   accordion start
+    const accordionButtons = document.querySelectorAll('.accordion-button');
+
+accordionButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        // Toggle active class for the button
+        this.classList.toggle('active');
+
+        // Get the corresponding accordion content
+        const content = this.nextElementSibling;
+
+        if (content.style.maxHeight) {
+            // If content is already open, close it
+            content.style.maxHeight = null;
+            content.style.padding = '0 15px';
+        } else {
+            // If content is closed, open it
+            content.style.maxHeight = content.scrollHeight + 'px';
+            content.style.padding = '15px';
+        }
+    });
+});
+// accordion ends
+
+// animation will show when section will appear start
+
+ const sections = document.querySelectorAll('section');
+
+// Intersection Observer options
+const options = {
+    root: null, // Uses the viewport as the root
+    threshold: 0.2, // 20% of the section must be visible to trigger animation
+};
+
+// Callback function for the Intersection Observer
+const sectionObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Add class to trigger the animation
+            entry.target.classList.add('visible');
+            // Stop observing once the section has become visible
+            observer.unobserve(entry.target);
+        }
+    });
+}, options);
+
+// Attach observer to each section
+sections.forEach(section => {
+    sectionObserver.observe(section);
+});
+// animation will show when section will appear ends
+    </script>
+  </body>
+</html>
